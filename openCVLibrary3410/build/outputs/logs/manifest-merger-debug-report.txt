@@ -1,12 +1,12 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/rishirajrsawant/AndroidStudioProjects/OpenCVBgSubtraction/openCVLibrary3410/src/main/AndroidManifest.xml:2:1-8:12
-INJECTED from /Users/rishirajrsawant/AndroidStudioProjects/OpenCVBgSubtraction/openCVLibrary3410/src/main/AndroidManifest.xml:2:1-8:12
-INJECTED from /Users/rishirajrsawant/AndroidStudioProjects/OpenCVBgSubtraction/openCVLibrary3410/src/main/AndroidManifest.xml:2:1-8:12
-INJECTED from /Users/rishirajrsawant/AndroidStudioProjects/OpenCVBgSubtraction/openCVLibrary3410/src/main/AndroidManifest.xml:2:1-8:12
-INJECTED from /Users/rishirajrsawant/AndroidStudioProjects/OpenCVBgSubtraction/openCVLibrary3410/src/main/AndroidManifest.xml:2:1-8:12
-INJECTED from /Users/rishirajrsawant/AndroidStudioProjects/OpenCVBgSubtraction/openCVLibrary3410/src/main/AndroidManifest.xml:2:1-8:12
-INJECTED from /Users/rishirajrsawant/AndroidStudioProjects/OpenCVBgSubtraction/openCVLibrary3410/src/main/AndroidManifest.xml:2:1-8:12
+ADDED from /Users/rishirajrsawant/AndroidStudioProjects/OpenCVBgSubtraction/openCVLibrary3410/src/main/AndroidManifest.xml:2:1-7:12
+INJECTED from /Users/rishirajrsawant/AndroidStudioProjects/OpenCVBgSubtraction/openCVLibrary3410/src/main/AndroidManifest.xml:2:1-7:12
+INJECTED from /Users/rishirajrsawant/AndroidStudioProjects/OpenCVBgSubtraction/openCVLibrary3410/src/main/AndroidManifest.xml:2:1-7:12
+INJECTED from /Users/rishirajrsawant/AndroidStudioProjects/OpenCVBgSubtraction/openCVLibrary3410/src/main/AndroidManifest.xml:2:1-7:12
+INJECTED from /Users/rishirajrsawant/AndroidStudioProjects/OpenCVBgSubtraction/openCVLibrary3410/src/main/AndroidManifest.xml:2:1-7:12
+INJECTED from /Users/rishirajrsawant/AndroidStudioProjects/OpenCVBgSubtraction/openCVLibrary3410/src/main/AndroidManifest.xml:2:1-7:12
+INJECTED from /Users/rishirajrsawant/AndroidStudioProjects/OpenCVBgSubtraction/openCVLibrary3410/src/main/AndroidManifest.xml:2:1-7:12
 	package
 		ADDED from /Users/rishirajrsawant/AndroidStudioProjects/OpenCVBgSubtraction/openCVLibrary3410/src/main/AndroidManifest.xml:3:7-27
 		INJECTED from /Users/rishirajrsawant/AndroidStudioProjects/OpenCVBgSubtraction/openCVLibrary3410/src/main/AndroidManifest.xml
