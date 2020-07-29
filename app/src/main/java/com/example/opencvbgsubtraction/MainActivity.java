@@ -14,7 +14,6 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.video.*;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.SurfaceView;
 import android.widget.Toast;
 
@@ -26,8 +25,9 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     BaseLoaderCallback baseLoaderCallback;
     private Mat mRgb;
     private Mat mFGMask;
-    private Mat frame, whiteFrame, threshold;
+    private Mat frame, whiteFrame, threshold, threshold_prev;
     private BackgroundSubtractorMOG2 mog2;
+    private boolean frameFlag;
 
 
 
@@ -76,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         mFGMask = new Mat();
         whiteFrame = new Mat();
         threshold = new Mat();
+        threshold_prev = new Mat();
+        frameFlag = true;
         mog2 = Video.createBackgroundSubtractorMOG2(0, 10, true);
 
     }
@@ -85,36 +87,44 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         frame = inputFrame.rgba();
 
         Imgproc.cvtColor(frame, mRgb, Imgproc.COLOR_RGBA2GRAY);
-        mog2.apply(frame, mFGMask, 0.4); //apply() exports a gray image by definition
-        Imgproc.cvtColor(mFGMask, frame, Imgproc.COLOR_GRAY2RGBA);
 
-        //converting into gray image
-        Imgproc.cvtColor(frame, frame, Imgproc.COLOR_RGBA2GRAY);
+        //performing background subtraction
+        mog2.apply(frame, mFGMask, 0.4); //apply() exports a gray image by definition
 
         //calculating threshold
-        Imgproc.threshold(frame, threshold, 127, 255, Imgproc.THRESH_BINARY);
+        Imgproc.threshold(mFGMask, threshold, 126, 255, Imgproc.THRESH_BINARY);
 
-        //applying bitwise-xor
-        Core.bitwise_xor(frame, threshold, whiteFrame);
+        if(frameFlag){
+            frameFlag = false;
+            threshold.copyTo(threshold_prev);
+        }
+
+        //Applying Bitwise-XOR on threshold and previous threshold frame
+        Core.bitwise_xor(threshold, threshold_prev, whiteFrame);
+
+        //applying median blur
+        Imgproc.medianBlur(whiteFrame, whiteFrame, 5);
+
+        threshold.copyTo(threshold_prev);
 
         //getting the count of white pixels
         int n = Core.countNonZero(whiteFrame);
+
+
         float qom = ((float) n)/(307200);
 
         String result = String.format("%.4f", qom);
-        Log.i("whitePixels", "white:"+n);
-        Log.i("whitePixels", "QoM:"+result);
 
-        Imgproc.cvtColor(frame,frame,Imgproc.COLOR_GRAY2RGBA);
+        Imgproc.cvtColor(whiteFrame,whiteFrame,Imgproc.COLOR_GRAY2RGBA);
 
-        Imgproc.putText(frame, "Quantity of Motion:"+result, new Point(5,30), 0, 0.7, new Scalar(255,0,0), 2);
-        return frame;
+        Imgproc.putText(whiteFrame, "Quantity of Motion:"+result, new Point(5,30), 0, 0.7, new Scalar(255,0,0), 2);
+        return whiteFrame;
     }
 
 
     @Override
     public void onCameraViewStopped() {
-        frame.release();
+        whiteFrame.release();
     }
 
 
