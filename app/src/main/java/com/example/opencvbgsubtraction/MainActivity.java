@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
 
+
     CameraBridgeViewBase cameraBridgeViewBase;
     BaseLoaderCallback baseLoaderCallback;
     private Mat mRgb;
@@ -110,14 +111,19 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         //getting the count of white pixels
         int n = Core.countNonZero(whiteFrame);
 
-
         float qom = ((float) n)/(307200);
 
         String result = String.format("%.4f", qom);
 
         Imgproc.cvtColor(whiteFrame,whiteFrame,Imgproc.COLOR_GRAY2RGBA);
 
-        Imgproc.putText(whiteFrame, "Quantity of Motion:"+result, new Point(5,30), 0, 0.7, new Scalar(255,0,0), 2);
+        Imgproc.putText(whiteFrame, "Quantity of Motion:"+result, new Point(5,30), 0, 0.7, new Scalar(0,0,255), 2);
+
+        if (qom >= 0.05) {
+            Imgproc.putText(whiteFrame, "Status: Crowded", new Point(5, 400), 0, 0.7, new Scalar(255, 0, 0), 2);
+        }
+        else
+            Imgproc.putText(whiteFrame, "Status: Not Crowded", new Point(5,400), 0, 0.7, new Scalar(0,255,0), 2);
         return whiteFrame;
     }
 
